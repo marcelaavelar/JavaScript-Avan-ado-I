@@ -59,21 +59,5 @@
             let negociacaoController = new NegociacaoController();
         </script>
 
-        <script>
-            let negociacao = new Proxy(new Negociacao(new Date(), 1, 100), {
-
-                
-                set: function(target, prop, value, receiver){
-
-                    console.log(`novo valor: ${value}`);
-                    return Reflect.set(target, prop, value, receiver);
-                }
-            });
-
-            negociacao._quantidade = 10;
-            negociacao._valor = 100;
-
-        </script>
-        
     </body>
 </html>
