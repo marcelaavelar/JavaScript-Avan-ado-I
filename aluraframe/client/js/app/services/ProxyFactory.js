@@ -1,7 +1,8 @@
 class ProxyFactory {
-    static create (objeto, props, acao) {
 
-       return new Proxy(new ListaNegociacoes(), {
+    static create(objeto, props, acao) {
+
+       return new Proxy(objeto, {
 
             get(target, prop, receiver){
                 
@@ -9,7 +10,7 @@ class ProxyFactory {
 
                     return function() {
 
-                        console.log(`a propriedade "${prop}" foi interceptada`);
+                        console.log(`interceptando ${prop}`);
                         
                         Reflect.apply(target[prop], target, arguments);
                         return acao(target);
@@ -19,7 +20,8 @@ class ProxyFactory {
              },
              set(target, prop, value, receiver) {
 
-                if(props.includes.prop) {
+                if(props.includes(prop)) {
+                    target[prop] = value;
                     acao(target);
                 }
                  return Reflect.set(target, prop, value, receiver);
