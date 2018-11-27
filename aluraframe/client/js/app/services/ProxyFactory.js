@@ -13,19 +13,22 @@ class ProxyFactory {
                         console.log(`interceptando ${prop}`);
                         
                         Reflect.apply(target[prop], target, arguments);
-                        return acao(target);
+                        acao(target);
+
                     }
                 }
                 return Reflect.get(target, prop, receiver);
              },
+
              set(target, prop, value, receiver) {
 
+                let retorno = Reflect.set(target, prop, value, receiver);
                 if(props.includes(prop)) {
-                    target[prop] = value;
                     acao(target);
                 }
-                 return Reflect.set(target, prop, value, receiver);
+                 return retorno;
              }
+
         });
     }
     static _ehFuncao(func) {
