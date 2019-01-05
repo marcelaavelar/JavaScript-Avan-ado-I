@@ -82,7 +82,7 @@ class NegociacaoController {
         this._inputData.focus();
     }
 
-    ordena (coluna) {
+    ordena(coluna) {
 
         if(this._ordemAtual == coluna) {
 
