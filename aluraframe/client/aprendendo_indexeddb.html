@@ -80,13 +80,25 @@
                         
                         console.log(negociacoes);
                     }
-                }
+                };
 
                 cursor.onerror = e => {
 
                     console.log(e.target.error.name);
-                }
+                };
             }
+
+            ConnectionFactory
+                .getConnection()
+                .then(connection => {
+                    
+                    // a conexão tem que ser a mesma utilizada anteriormente.
+                })
+
+            // a) getConnection vai ser um método estático
+            // b) getConnection vai retornar uma promise
+            // c) não importa o número de vezes que eu chamar o método estático, a conexão tem que ser a mesma
+            // d) o programador não pode chamar close diretamente. Ela só pode ser fechada através da própria ConnectionFactory
             
         </script>
     </body>

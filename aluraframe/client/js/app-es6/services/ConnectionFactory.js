@@ -63,6 +63,7 @@ export class ConnectionFactory {
 
             close();
             connection = null;
+            close = null;
         }
     }
 }

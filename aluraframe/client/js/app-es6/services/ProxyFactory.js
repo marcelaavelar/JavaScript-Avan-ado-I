@@ -20,15 +20,13 @@ export class ProxyFactory {
                 return Reflect.get(target, prop, receiver);
              },
 
-             set(target, prop, value, receiver) {
+            set(target, prop, value, receiver) {
 
                 let retorno = Reflect.set(target, prop, value, receiver);
-                if(props.includes(prop)) {
+                if(props.includes(prop)) 
                     acao(target);
-                }
-                 return retorno;
-             }
-
+                return retorno;
+            }
         });
     }
     static _ehFuncao(func) {

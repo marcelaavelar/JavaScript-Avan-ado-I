@@ -43,16 +43,15 @@
 
         <div id="negociacoesView"></div>
 
-        <script>var exports = {};</script>
-
         <script src="node_modules/systemjs/dist/system.js"></script>
 
         <script>
-            System.defautJSExtensions = true; // permite omitir a extensão .js dos imports
-            System.import('js/app/boot').catch(function(err){
+            System.defautJSExtensions = false; // permite omitir a extensão .js dos imports 
+            System.import('js/app/boot').catch(function(err) {
                 console.error();
             });
+            
         </script>
-
+        
     </body>
 </html>

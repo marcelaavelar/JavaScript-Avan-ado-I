@@ -230,6 +230,14 @@ System.register([], function (_export, _context) {
   return {
     setters: [],
     execute: function () {
+      (function (self) {
+        'use strict';
+
+        if (self.fetch) {
+          return;
+        }
+      });
+
       support = {
         searchParams: 'URLSearchParams' in self,
         iterable: 'Symbol' in self && 'iterator' in Symbol,

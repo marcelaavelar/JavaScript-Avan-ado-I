@@ -44,11 +44,6 @@ System.register([], function (_export, _context) {
                 }
 
                 _createClass(Negociacao, [{
-                    key: "isEquals",
-                    value: function isEquals(outraNegociacao) {
-                        return this._data.getTime() == outraNegociacao.data.getTime() && this._valor == outraNegociacao.valor;
-                    }
-                }, {
                     key: "volume",
                     get: function get() {
                         return this._quantidade * this._valor;

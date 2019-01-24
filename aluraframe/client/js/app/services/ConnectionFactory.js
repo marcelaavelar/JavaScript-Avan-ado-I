@@ -98,6 +98,7 @@ System.register([], function (_export, _context) {
 
                             close();
                             connection = null;
+                            close = null;
                         }
                     }
                 }]);

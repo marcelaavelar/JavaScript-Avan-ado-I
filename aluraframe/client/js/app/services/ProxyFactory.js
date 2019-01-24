@@ -66,9 +66,7 @@ System.register([], function (_export, _context) {
                             set: function set(target, prop, value, receiver) {
 
                                 var retorno = Reflect.set(target, prop, value, receiver);
-                                if (props.includes(prop)) {
-                                    acao(target);
-                                }
+                                if (props.includes(prop)) acao(target);
                                 return retorno;
                             }
                         });

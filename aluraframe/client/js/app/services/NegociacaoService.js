@@ -48,21 +48,6 @@ System.register(['./HttpService', './ConnectionFactory', '../dao/NegociacaoDao',
                 }
 
                 _createClass(NegociacaoService, [{
-                    key: 'obterNegociacoes',
-                    value: function obterNegociacoes() {
-
-                        return Promise.all([this.obterNegociacoesDaSemana(), this.obterNegociacoesDaSemanaAnterior(), this.obterNegociacoesDaSemanaRetrasada()]).then(function (periodos) {
-
-                            var negociacoes = periodos.reduce(function (dados, periodo) {
-                                return dados.concat(periodo);
-                            }, []);
-
-                            return negociacoes;
-                        }).catch(function (erro) {
-                            throw new Error(erro);
-                        });
-                    }
-                }, {
                     key: 'obterNegociacoesDaSemana',
                     value: function obterNegociacoesDaSemana() {
 
@@ -99,6 +84,21 @@ System.register(['./HttpService', './ConnectionFactory', '../dao/NegociacaoDao',
                         }).catch(function (erro) {
                             console.log(erro);
                             throw new Error('Não foi possível obter as negociações da semana retrasada.');
+                        });
+                    }
+                }, {
+                    key: 'obterNegociacoes',
+                    value: function obterNegociacoes() {
+
+                        return Promise.all([this.obterNegociacoesDaSemana(), this.obterNegociacoesDaSemanaAnterior(), this.obterNegociacoesDaSemanaRetrasada()]).then(function (periodos) {
+
+                            var negociacoes = periodos.reduce(function (dados, periodo) {
+                                return dados.concat(periodo);
+                            }, []);
+
+                            return negociacoes;
+                        }).catch(function (erro) {
+                            throw new Error(erro);
                         });
                     }
                 }, {

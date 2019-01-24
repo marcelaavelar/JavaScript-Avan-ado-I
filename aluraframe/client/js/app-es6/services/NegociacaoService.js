@@ -1,29 +1,13 @@
 import {HttpService} from './HttpService';
 import {ConnectionFactory} from './ConnectionFactory';
 import {NegociacaoDao} from '../dao/NegociacaoDao';
-import {Negociacao} from '../models/Negociacao'
+import {Negociacao} from '../models/Negociacao';
 
 export class NegociacaoService {
 
     constructor() {
         
         this._http = new HttpService();
-    }
-
-    obterNegociacoes() {
-        
-        return Promise.all([
-            this.obterNegociacoesDaSemana(),
-            this.obterNegociacoesDaSemanaAnterior(),
-            this.obterNegociacoesDaSemanaRetrasada()
-        ]).then(periodos => {
-
-            let negociacoes = periodos.reduce((dados, periodo) => dados.concat(periodo), []);
-
-            return negociacoes;
-        }).catch(erro => {
-            throw new Error(erro);
-        });
     }
 
     obterNegociacoesDaSemana() {
@@ -67,7 +51,22 @@ export class NegociacaoService {
             throw new Error('Não foi possível obter as negociações da semana retrasada.');
         });
     }
-    
+
+    obterNegociacoes() {
+        
+        return Promise.all([
+            this.obterNegociacoesDaSemana(),
+            this.obterNegociacoesDaSemanaAnterior(),
+            this.obterNegociacoesDaSemanaRetrasada()
+        ]).then(periodos => {
+
+            let negociacoes = periodos.reduce((dados, periodo) => dados.concat(periodo), []);
+
+            return negociacoes;
+        }).catch(erro => {
+            throw new Error(erro);
+        });
+    }
     cadastra(negociacao)  {
 
         return ConnectionFactory
@@ -96,14 +95,14 @@ export class NegociacaoService {
     apaga() {
 
         return ConnectionFactory
-        .getConnection()
-        .then(connection => new NegociacaoDao(connection))
-        .then(dao => dao.apagaTodos())
-        .then(() => 'Negociações apagadas com sucesso.')
-        .catch(erro => {
-            console.log(erro);
-            throw new Error('Não foi possível apagar as negociações.');
-        })
+            .getConnection()
+            .then(connection => new NegociacaoDao(connection))
+            .then(dao => dao.apagaTodos())
+            .then(() => 'Negociações apagadas com sucesso.')
+            .catch(erro => {
+                console.log(erro);
+                throw new Error('Não foi possível apagar as negociações.');
+            })
     }
 
     importa(listaAtual) {
